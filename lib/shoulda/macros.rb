@@ -37,7 +37,7 @@ module Shoulda # :nodoc:
     #   # Assert the value changed to "new:"
     #   should_change("the post title", :to => "new") { @post.title }
     def should_change(description, options = {}, &block)
-      ::ActiveSupport::Deprecation.warn
+      #::ActiveSupport::Deprecation.warn
       by, from, to = get_options!([options], :by, :from, :to)
       stmt = "change #{description}"
       stmt << " from #{from.inspect}" if from
@@ -70,7 +70,6 @@ module Shoulda # :nodoc:
     #     should_not_change("the number of posts") { Post.count }
     #   end
     def should_not_change(description, &block)
-      ::ActiveSupport::Deprecation.warn
       before = lambda { @_before_should_not_change = block.bind(self).call }
       should "not change #{description}", :before => before do
         new_value = block.bind(self).call
